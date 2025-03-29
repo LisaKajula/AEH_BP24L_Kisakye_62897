@@ -1,4 +1,6 @@
-ackage pl.pp;
+package pl.pp;
+
+/*package pl.pp;
 import java.util.Scanner;
 public class myThirdApp {
  public static void main(String[] args) {
@@ -49,4 +51,40 @@ wynik);
  }
  scanner.close();
  }
+}
+*/
+import java.util.Scanner;
+
+public class myThirdApp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Convert days to weeks and days
+        while (true) {
+            System.out.print("Enter the number of days (enter 0 or a negative number to exit): ");
+            int days = scanner.nextInt();
+            if (days <= 0) {
+                System.out.println("Exiting program.");
+                break;
+            }
+            int weeks = days / 7;
+            int remainingDays = days % 7;
+            System.out.println(days + " days is " + weeks + " weeks and " + remainingDays + " days.");
+        }
+        
+        // Convert Celsius to Fahrenheit and Kelvin
+        while (true) {
+            System.out.print("Enter temperature in Celsius (-1 to exit): ");
+            double celsius = scanner.nextDouble();
+            if (celsius == -1) {
+                System.out.println("Exiting program.");
+                break;
+            }
+            double fahrenheit = 1.8 * celsius + 32.0;
+            double kelvin = celsius + 273.16;
+            System.out.printf("Celsius: %.2f, Fahrenheit: %.2f, Kelvin: %.2f%n", celsius, fahrenheit, kelvin);
+        }
+        
+        scanner.close();
+    }
 }
