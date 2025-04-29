@@ -1,3 +1,5 @@
+package pl.pp;
+
 public class myFifthApp {
 
     // Iterative factorial method
@@ -29,7 +31,7 @@ public class myFifthApp {
         long startRecursive = System.nanoTime();
         long resultRecursive = factorialRecursive(N);
         long endRecursive = System.nanoTime();
-        System.out.println("Recursive Result: " + resultRecursive);
+        System.out.println("Recursive Result : " + resultRecursive);
         System.out.println("Time taken (Recursive): " + (endRecursive - startRecursive) + " ns");
     }
 }
