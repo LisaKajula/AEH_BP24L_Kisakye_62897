@@ -1,0 +1,63 @@
+package pl.pp;
+
+import java.io.*;
+import java.util.*;
+
+public class myThirteenthApp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        File inputFile;
+
+        while (true) {
+            System.out.print("Enter the path to the input text file: ");
+            String inputPath = scanner.nextLine();
+            inputFile = new File(inputPath);
+
+            if (inputFile.exists() && inputFile.isFile()) {
+                break;
+            } else {
+                System.out.println("File not found. Please try again.");
+            }
+        }
+
+        System.out.print("Enter the path to the output file: ");
+        String outputPath = scanner.nextLine();
+
+        try (
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath))
+        ) {
+            Map<String, Integer> wordCountMap = new HashMap<>();
+            int totalWords = 0;
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] words = line.toLowerCase().replaceAll("[^a-zA-Z0-9\\s]", "").split("\\s+");
+                for (String word : words) {
+                    if (!word.isEmpty()) {
+                        wordCountMap.put(word, wordCountMap.getOrDefault(word, 0) + 1);
+                        totalWords++;
+                    }
+                }
+            }
+
+            // Display and write results
+            System.out.println("\n--- Analysis Results ---");
+            System.out.println("Total words: " + totalWords);
+            writer.write("File analyzed: " + inputFile.getName() + "\n");
+            writer.write("Total words: " + totalWords + "\n");
+            writer.write("\nWord Frequency:\n");
+
+            for (Map.Entry<String, Integer> entry : wordCountMap.entrySet()) {
+                String output = entry.getKey() + ": " + entry.getValue();
+                System.out.println(output);
+                writer.write(output + "\n");
+            }
+
+            System.out.println("\nResults saved to: " + outputPath);
+
+        } catch (IOException e) {
+            System.out.println("Error processing file: " + e.getMessage());
+        }
+    }
+}
