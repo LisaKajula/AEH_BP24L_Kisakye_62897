@@ -1,4 +1,5 @@
 package pl.pp;
 
-public class Account {
+public interface FuelType {
+    String getFuelType();
 }
